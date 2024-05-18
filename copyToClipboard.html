@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copy To Clipboard</title>
+    <style>
+        body{
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container{
+            width: 600px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-direction: column;
+            gap: 10px;
+            padding: 10px;
+            border: 1px solid;
+            box-shadow: 5px 4px 20px black;
+            
+        }
+        .content{
+            width: 90%;
+            height: 400px;
+        }
+        .btn{
+            width: 50%;
+            height: 50px;
+            border-radius: 10px;
+            background: blue;
+            color: white;
+            transition: all .5s ease-in-out;
+            cursor: pointer
+        }
+        .btn:hover{
+            opacity: 0.7;
+        }
+        .btn:active{
+            transform: scale(0.9);
+        }
+        .copied{
+            display: block;
+            font-size: 26px;
+            color: gray;
+            transform: scale(0);
+            transition: all 0.5s;
+        }
+        .copied.bounceEffect{
+            animation: bounceIn .8s linear;
+        }
+        @keyframes bounceIn {
+            0%{
+                opacity: 0;
+                transform: scale(0.3)
+            }
+            20%{
+                transform: scale(1.1);
+            }
+            40%{
+                transform: scale(0.9);
+            }
+            60%{
+                opacity: 1;
+                transform: scale(1.03);
+            }
+            80%{
+                transform: scale(0.97);
+            }
+            100%{
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">
+            Copy To Clipboard
+        </h1>
+        <textarea name="textarea" id="content" class="content">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus natus similique totam odit iusto. Voluptas veritatis culpa corrupti fugiat non.
+        </textarea>
+        <button class="btn" id="btn">Copy</button>
+        <span class="copied">copied!</span>
+    </div>
+
+
+
+    
+
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js" ></script>
+    <script>
+        $(document).ready(function(){
+            function add(){
+                $(".copied").addClass("bounceEffect")
+            }
+            function remove(){
+                $(".copied").removeClass("bounceEffect")
+            }
+            $("#btn").click(function(){
+                $("#content").select();
+                document.execCommand("copy");
+                add();
+                setTimeout(remove, 800);
+            })
+        })
+    </script>
+</body>
+</html>
